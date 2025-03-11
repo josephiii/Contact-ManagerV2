@@ -1,4 +1,5 @@
-CREATE TABLE 'Reach' . 'Users' ( -- if no database exists, create one called Reach
+CREATE TABLE Users ( 
+
     id INT NOT NULL AUTO_INCREMENT, -- user ID that increments 
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL UNIQUE,
@@ -7,7 +8,7 @@ CREATE TABLE 'Reach' . 'Users' ( -- if no database exists, create one called Rea
     primary key (id) -- no two users can have the same ID
 ) Engine = InnoDB; 
 
-CREATE TABLE 'Reach' . 'Contacts' (
+CREATE TABLE Contacts (
 
     id INT NOT NULL AUTO_INCREMENT,
     firstName VARCHAR(50) NOT NULL,
