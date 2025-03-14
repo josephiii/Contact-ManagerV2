@@ -9,7 +9,7 @@
         private $conn;
 
         // DB connection requirments
-        private function __construct($hostname, $username, $password, $database){
+        public function __construct($hostname, $username, $password, $database){
             $this->hostname = $hostname;
             $this->username = $username;
             $this->password = $password;
@@ -44,10 +44,5 @@
             $this->conn = null;
         }
     }
-
-
-
-
-
 
 ?>

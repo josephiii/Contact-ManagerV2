@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // send info to server (PHP)
-        fetch('register.php', {
+        fetch('../LAMPAPI/user-endpts/register.php', { 
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(userInfo) 
