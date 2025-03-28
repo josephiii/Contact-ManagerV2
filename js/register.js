@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         // send info to server (PHP)
-        fetch('../LAMPAPI/user-endpts/register.php', { 
+        fetch('../../LAMPAPI/user-endpts/register.php', { // the ../ may be redundant
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(userInfo) 
@@ -47,8 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             if(data.success){
                 alert('Registration Successful!');
+                window.location.href = 'index.html';
             } else {
-                alert(data.error);
+                alert(data.error); // may be secuirty concern
             }
         })
         .catch(error => {

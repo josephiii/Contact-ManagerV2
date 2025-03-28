@@ -36,7 +36,7 @@
     try{
 
         // creates DB obj and makes connection
-        $database = new Database($dbHost, $dbUsername, $dbName, $dbPassword);
+        $database = new Database($dbHost, $dbUsername, $dbPassword, $dbName);
         $conn = $database->getConn();
 
         // queries for existing username/ email

@@ -4,23 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reach Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     
-    <h1>Welcome to Reach<h1>
-    <h3>One Tap, Infinite Connections<h3>
+    <h1>Welcome to Reach</h1>
+    <h3>One Tap, Infinite Connections</h3>
     
     <div class="login-container">
         <h3>Login</h3>
 
-        <form>
-            <lable for="username">Email or Username</lable>
+        <form id="login-form">
+            <label for="username">Email or Username</lable>
             <input type="text" name="username" id="username">
             
-            <lable for="password">Password</lable>
+            <label for="password">Password</lable>
             <input type="password" name="password" id="password">
+
+            <button type="submit">Login</button>
         </form>
 
         <p>Don't have an account? <a href="register.html">Sign Up Here</a></p>
@@ -31,6 +33,8 @@
             <p>&copy; 2025 Reach</p>
         </footer>
     </div>
+
+    <script defer src="js/login.js"></script>
 </body>
 
 </html>
