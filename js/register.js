@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Registration Successful!');
                 window.location.href = 'index.html';
             } else {
-                alert(data.error); // may be secuirty concern
+                alert(data.message); // may be secuirty concern
             }
         })
         .catch(error => {

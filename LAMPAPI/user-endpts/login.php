@@ -47,9 +47,11 @@
 
         if($user){
             if($password == $user['password']){ // IMPLEMENT HASHING FOR DB!!!!!!!
+                $database->closeConn();
                 validate(true, 'Login Successful');
 
             } else {
+                $database->closeConn();
                 validate(false, 'Invalid Username or Password');
             }
 
@@ -63,16 +65,6 @@
         if(isset($database)){
             $database->closeConn();
         }
-        validate(false, 'Database Error: ' . $e->getMessage());
+        validate(false, 'An error has occurred. Please try again later.');
     }
-
-
-
-
-
-
-
-
-
-
 ?>

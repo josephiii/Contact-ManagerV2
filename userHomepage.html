@@ -9,13 +9,39 @@
 
 <body>
     
-   <h1>Contacts</h1>
+    <header>
+        <h1>Reach</h1>
+
+        <nav> 
+            <ul>
+                <li><a href="userHomepage.html">Contacts</a></li>
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+
+    </header>
+   
+    <div class="contacts-container">
+        
+        <div class="header">
+            <h3>Contacts</h3>
+            <button id="add-contact">Add New Contact</button>
+        </div>
+
+        <div class="search-bar">
+            <input type="text" id="search" placeholder="Search Contacts...">
+        </div>
+
+    </div>
 
     <div>
         <footer>
             <p>&copy; 2025 Reach</p>
         </footer>
     </div>
+
+    <script src="js/userHomepage.js"></script>
 </body>
 
 </html>

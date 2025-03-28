@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 alert('Login Successful!');
                 window.location.href = '../userHomepage.html'
             } else {
-                alert(data.error); // may be secuirty concern
+                alert(data.message); // may be secuirty concern
             }
         })
         .catch(error => {

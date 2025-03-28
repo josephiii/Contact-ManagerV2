@@ -44,5 +44,4 @@
             $this->conn = null;
         }
     }
-
 ?>
