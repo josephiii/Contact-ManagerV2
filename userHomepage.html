@@ -33,6 +33,38 @@
             <input type="text" id="search" placeholder="Search Contacts...">
         </div>
 
+        <div id="contacts-list">
+
+        </div>
+
+    </div>
+
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Add New Contact</h2>
+            <form id="contact-form">
+                <div>
+                    <input type="text" id="first-name" placeholder="First Name" required>
+                </div>
+                <div>
+                    <input type="text" id="last-name" placeholder="Last Name" required>
+                </div>
+                <div>
+                    <input type="tel" id="phone-number" placeholder="Phone Number">
+                </div>
+                <div>
+                    <input type="email" id="email" placeholder="Email">
+                </div>
+                <div>
+                    <input type="text" id="address" placeholder="Address">
+                </div>
+
+                <div>
+                    <button type="submit" id="save-contact">Add Contact</button>
+                    <button type="button" id="cancel-contact">Cancel</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div>

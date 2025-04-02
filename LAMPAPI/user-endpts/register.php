@@ -27,10 +27,10 @@
         validate(false, 'Invalid Email');
     }
 
-    // DB Connection
+    // DB Connection 
     $dbHost = 'localhost';
     $dbName = 'reach';
-    $dbUsername = 'username';
+    $dbUsername = 'user';
     $dbPassword = 'password';
 
     try{
