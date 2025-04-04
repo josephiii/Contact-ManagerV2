@@ -31,7 +31,7 @@
     $dbHost = 'localhost';
     $dbName = 'reach';
     $dbUsername = 'user';
-    $dbPassword = 'password';
+    $dbPassword = 'pwd';
 
     try{
 

@@ -13,7 +13,7 @@ const cancelContactBtn = document.getElementById("cancel-contact");
 // Form Information
 const firstName = document.getElementById("first-name");
 const lastName = document.getElementById("last-name");
-const phoneNumber = documnet.getElementById("phone-number");
+const phoneNumber = document.getElementById("phone-number");
 const email = document.getElementById("email");
 const address = document.getElementById("address");
 
@@ -21,14 +21,14 @@ const address = document.getElementById("address");
 let contacts = [];
 let currentContactId = null;
 
-document.addEventListener("DOMConentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     fetchContacts();
 
     addContactBtn.addEventListener('click', addContactModal);
     searchBar.addEventListener('input', search);
     form.addEventListener('submit', submitForm);
-    cancelContactBtn.addEventListner('click', closeModal);
+    cancelContactBtn.addEventListener('click', closeModal);
 
 });
 
@@ -42,7 +42,7 @@ function fetchContacts(){
     })
     .then(data => {
         contacts = data; // stores in our array
-        renderContacts();
+        renderContacts(contacts);
     })
     .catch(error => {
         alert('There was an issue loading contacts, please try again.');
@@ -55,12 +55,13 @@ function renderContacts(displayedContacts){
 
     if(displayedContacts.length === 0){
         contactList.innerHTML = "<p>No Contacts Found</p>";
+        return;
     }
 
     displayedContacts.forEach(contact => {
         const contactDiv = document.createElement("div");
         contactDiv.className = 'contact-entry';
-        contactDiv.dataSet.id = contact.id; // for delete
+        contactDiv.dataset.id = contact.id; // for delete
 
         contactDiv.innerHTML = `
             <h2>${contact.firstName} ${contact.lastName}</h2>
@@ -81,7 +82,7 @@ function renderContacts(displayedContacts){
         });
 
         contactDiv.querySelector('.del-btn').addEventListener('click', () => {
-            // delete contact
+            delContact(contact.id);
         });
 
         contactList.appendChild(contactDiv);
@@ -127,9 +128,9 @@ function submitForm(event){
     }
 
     if(currentContactId){
-        // update contact
+        updateContact(currentContactId, contactData);
     } else {
-        // create new contact
+        createContact(contactData);
     }
 }
 
@@ -158,6 +159,92 @@ function search(){
     });
 }
 
-//add contact
-//update contact
-//delete contact
+function createContact(contactData){
+    fetch('../LAMPAPI/contact-endpts/createCon.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(contactData)
+    })
+    .then(response => {
+        if(response.ok){
+            return response.json();
+        }
+        throw new Error('Failed to Create Contact'); // may be secuirty concern
+    })
+    .then(data => {
+        contacts.push(data);
+        renderContacts(contacts);
+        closeModal();
+        alert('Contact Created!');
+    })
+    .catch(error => {
+        alert('There was an issue creating the contact');
+        console.error('Error: ', error);
+    });
+}
+
+function updateContact(id, contactData){
+
+    contactData.id = id;
+
+    fetch('../LAMPAPI/contact-endpts/updateCon.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(contactData)
+    })
+    .then(response => {
+        if(response.ok){
+            return response.json();
+        }
+        throw new Error('Failed to Update Contact'); // may be secuirty concern
+    })
+    .then(data => {
+
+        const index = contacts.findIndex(contact => contact.id === id);
+        if(index !== -1){
+            contacts[index] = data;
+        }
+
+        renderContacts(contacts);
+        closeModal();
+        alert('Contact Updated!');
+    })
+    .catch(error => {
+        alert('There was an issue updating the contact');
+        console.error('Error: ', error);
+    });
+}
+
+function delContact(id){
+
+    const userId = {
+        id: id
+    }
+
+    fetch('../LAMPAPI/contact-endpts/deleteCon.php', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userId)
+    })
+    .then(response => {
+        if(response.ok){
+            return response.json();
+        }
+        throw new Error('Failed to Delete Contact'); // may be secuirty concern
+    })
+    .then(data => {
+        contacts = contacts.filter(contact => contact.id !== id);
+        renderContacts(contacts);
+        alert('Contact Deleted!');
+    })
+    .catch(error => {
+        alert('There was an issue deleting the contact');
+        console.error('Error: ', error);
+    });
+}
