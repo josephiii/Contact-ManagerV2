@@ -1,6 +1,7 @@
 <?php
    
     require_once '../database.php';
+    require_once('../dbConfig.php');
     header('Content-Type: application/json');
 
     function validate($success, $errorMessage){
@@ -27,11 +28,6 @@
         validate(false, 'Invalid Email');
     }
 
-    // DB Connection 
-    $dbHost = 'localhost';
-    $dbName = 'reach';
-    $dbUsername = 'user';
-    $dbPassword = 'pwd';
 
     try{
 

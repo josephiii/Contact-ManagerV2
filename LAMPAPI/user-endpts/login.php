@@ -1,6 +1,7 @@
 <?PHP
     
     require_once '../database.php';
+    require_once('../dbConfig.php');
     header('Content-Type: application/json');
 
     function validate($success, $errorMessage){
@@ -27,12 +28,7 @@
     $username = htmlspecialchars($data['username']);
     $password = $data['password']; // add password hashing with DB
 
-    // DB Connection
-    $dbHost = 'localhost';
-    $dbName = 'reach';
-    $dbUsername = 'user';
-    $dbPassword = 'pwd';
-
+    
     try{
 
         $database = new Database($dbHost, $dbUsername, $dbPassword, $dbName);
