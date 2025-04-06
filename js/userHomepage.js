@@ -142,7 +142,11 @@ function search(){
         return;
     }
 
-    fetch('../LAMPAPI/contact-endpts/readCon.php')
+    const url = searchTerm 
+        ? `../LAMPAPI/contact-endpts/searchCon.php?search=${encodeURIComponent(searchTerm)}` 
+        : '../LAMPAPI/contact-entpts/readCon.php';
+
+    fetch(url)
     .then(response => {
         if(response.ok){
             return response.json();
