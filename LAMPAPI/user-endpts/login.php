@@ -4,12 +4,25 @@
     require_once('../dbConfig.php');
     header('Content-Type: application/json');
 
-    function validate($success, $errorMessage){
+    function validate($success, $errorMessage, $userId = null, $username = null){
         $response = array(
             'success' => $success,
             'message' => $errorMessage);
+
+        if($userId !== null){
+            $response['userId'] = $userId;        
+        }
+
+        if($username !== null){
+            $response['username'] = $username;
+        }
+
         echo json_encode($response);
         exit;
+    } 
+
+    if($_SERVER['REQUEST_METHOD'] != 'POST'){
+        validate(false, 'Invalid Request Method (login)');
     }
 
     // grabs userInfo from POST
@@ -39,12 +52,12 @@
         $stmt->bindParam(':username', $username);
         $stmt->execute();
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC); // grabs user info if user/email is found
 
         if($user){
             if($password == $user['password']){ // IMPLEMENT HASHING FOR DB!!!!!!!
                 $database->closeConn();
-                validate(true, 'Login Successful');
+                validate(true, 'Login Successful', $user['userId'], $user['username']);
 
             } else {
                 $database->closeConn();

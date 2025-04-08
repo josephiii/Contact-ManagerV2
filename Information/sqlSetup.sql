@@ -1,6 +1,6 @@
 CREATE TABLE Users ( 
 
-    id INT NOT NULL AUTO_INCREMENT, -- user ID that increments 
+    userId INT NOT NULL AUTO_INCREMENT, -- user ID that increments 
     firstName VARCHAR(50) NOT NULL,
     username VARCHAR(50) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL UNIQUE,
@@ -13,10 +13,10 @@ CREATE TABLE Contacts (
 
     id INT NOT NULL AUTO_INCREMENT,
     firstName VARCHAR(50) NOT NULL,
-    lastname VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    phone VARCHAR(50) NOT NULL,
-    location VARCHAR(50), -- optional contact location field
+    phoneNumber VARCHAR(50) NOT NULL,
+    address VARCHAR(50), -- optional contact location field
 
     userId INT NOT NULL, -- matches users to their contacts
     primary key (id) -- no two contacts can have the same ID

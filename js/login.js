@@ -30,6 +30,10 @@ document.addEventListener('DOMContentLoaded', function(){
         })
         .then(data => {
             if(data.success){
+                localStorage.setItem('userId', data.userId);
+                localStorage.setItem('username', data.username);
+                localStorage.setItem('isLoggedIn', true);
+
                 alert('Login Successful!');
                 window.location.href = '../userHomepage.html'
             } else {

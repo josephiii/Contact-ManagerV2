@@ -23,6 +23,14 @@ let currentContactId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    const userId = localStorage.getItem('userId');
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+    if(!userId || !isLoggedIn){
+        alert('Please Login to view contacts!');
+        window.location.href = '../index.html';
+    }
+
     fetchContacts();
 
     addContactBtn.addEventListener('click', addContactModal);
@@ -33,7 +41,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function fetchContacts(){
-    fetch('../LAMPAPI/contact-endpts/readCon.php')
+    const userId = localStorage.getItem('userId');
+
+    fetch(`../LAMPAPI/contact-endpts/readCon.php?userId=${userId}`)
     .then(response => {
         if(response.ok){
             return response.json();
@@ -136,6 +146,7 @@ function submitForm(event){
 
 function search(){
     const searchTerm = searchBar.value.toLowerCase().trim();
+    const userId = localStorage.getItem('userId');
 
     if(!searchTerm){
         renderContacts(contacts);
@@ -143,8 +154,8 @@ function search(){
     }
 
     const url = searchTerm 
-        ? `../LAMPAPI/contact-endpts/searchCon.php?search=${encodeURIComponent(searchTerm)}` 
-        : '../LAMPAPI/contact-entpts/readCon.php';
+        ? `../LAMPAPI/contact-endpts/searchCon.php?userId=${userId}&search=${encodeURIComponent(searchTerm)}` 
+        : `../LAMPAPI/contact-entpts/readCon.php?userId=${userId}`;
 
     fetch(url)
     .then(response => {
@@ -164,6 +175,9 @@ function search(){
 }
 
 function createContact(contactData){
+
+    contactData.userId = localStorage.getItem('userId');
+
     fetch('../LAMPAPI/contact-endpts/createCon.php', {
         method: 'POST',
         headers: {
@@ -192,6 +206,7 @@ function createContact(contactData){
 function updateContact(id, contactData){
 
     contactData.id = id;
+    contactData.userId = localStorage.getItem('userId');
 
     fetch('../LAMPAPI/contact-endpts/updateCon.php', {
         method: 'PUT',

@@ -12,6 +12,10 @@
         exit;         
     }
 
+    if($_SERVER['REQUEST_METHOD'] != 'POST'){
+        validate(false, 'Invalid Request Method (register)');
+    }
+
     $json_data = file_get_contents('php://input'); // grabs userInfo json
     $data = json_decode($json_data, true); // json -> array (so we can use it)
 
