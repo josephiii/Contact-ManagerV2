@@ -59,19 +59,22 @@
 
     } catch(PDOException $error){
         validate(false, 'Database Error:' . $error->getMessage());
-    }
-    
-    $contact = array(
-        'id' => $id,
-        'firstName' => $firstName,
-        'lastName' => $lastName,
-        'phoneNumber' => $phoneNumber,
-        'email' => $email,
-        'address' => $address,
-        'userId' => $userId
-    );
+        
+    } finally{
 
-    echo json_encode($contact);
-    $db->closeConn();
-    exit;
+        $contact = array(
+            'id' => $id,
+            'firstName' => $firstName,
+            'lastName' => $lastName,
+            'phoneNumber' => $phoneNumber,
+            'email' => $email,
+            'address' => $address,
+            'userId' => $userId
+        );
+    
+        echo json_encode($contact);
+        $db->closeConn();
+        exit;
+
+    }
 ?>

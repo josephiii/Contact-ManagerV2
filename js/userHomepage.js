@@ -240,8 +240,9 @@ function updateContact(id, contactData){
 
 function delContact(id){
 
-    const userId = {
-        id: id
+    const data = {
+        id: id,
+        userId: localStorage.getItem('userId')
     }
 
     fetch('../LAMPAPI/contact-endpts/deleteCon.php', {
@@ -249,7 +250,7 @@ function delContact(id){
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(userId)
+        body: JSON.stringify(data)
     })
     .then(response => {
         if(response.ok){
